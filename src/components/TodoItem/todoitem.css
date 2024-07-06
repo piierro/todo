@@ -1,0 +1,36 @@
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+  /* Стилизовать кастомный checkbox */
+  .custom-checkbox .checkmark {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-checkbox .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    display: block;
+  }
+  
+  .custom-checkbox .checkmark::after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #550101;
+    border-width: 0 1px 1px 0;
+    transform: rotate(45deg);
+  }
