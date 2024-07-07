@@ -10,6 +10,15 @@ export interface Todo {
   completed: boolean;
 }
 
+const generateUniqueId = (todos: Todo[]): number => {
+  const ids = todos.map(todo => todo.id);
+  let newId = 1;
+  while (ids.includes(newId)) {
+    newId += 1;
+  }
+  return newId;
+};
+
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>(() => {
     const storedTodos = localStorage.getItem('todos');
@@ -36,7 +45,7 @@ const App: React.FC = () => {
 
     const newTodo: Todo = {
       inputValue: inputValue,
-      id: todos.length ? todos[todos.length - 1].id + 1 : 1,
+      id: generateUniqueId(todos),
       completed: false,
     };
     setTodos([newTodo, ...todos]);

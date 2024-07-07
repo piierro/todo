@@ -21,7 +21,7 @@
 }
 
 .filterBtn button:hover:not(.active) {
-  background-color: #ddd;
+  background-color: #5501011a;
 }
   
 .filterBtn button:focus {
