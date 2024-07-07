@@ -1,42 +1,88 @@
+import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import { act } from 'react';
 import TodoForm from './TodoForm';
 
-describe('TodoForm', () => {
-  const handleSubmit = jest.fn((e) => e.preventDefault());
+describe('TodoForm Component', () => {
+  const handleSubmit = jest.fn();
   const handleChange = jest.fn();
   const inputValue = '';
 
+  it('renders correctly', () => {
+    const { getByPlaceholderText, getByText } = render(
+      <TodoForm
+        handleSubmit={handleSubmit}
+        inputValue={inputValue}
+        handleChange={handleChange}
+      />
+    );
 
-//   test('renders input and submit button', () => {
-//     expect(screen.getByPlaceholderText('What needs to be done?')).toBeInTheDocument();
-//     expect(screen.getByText('Add Todo')).toBeInTheDocument();
-//   });
+    expect(getByPlaceholderText('What needs to be done?')).toBeInTheDocument();
+    expect(getByText('Add Todo')).toBeInTheDocument();
+  });
 
-//   test('calls handleSubmit when form is submitted', () => {
-//     const form = screen.getByRole('form');
-//     fireEvent.submit(form);
-//     expect(handleSubmit).toHaveBeenCalled();
-//   });
+  it('calls handleChange on input change', () => {
+    const { getByPlaceholderText } = render(
+      <TodoForm
+        handleSubmit={handleSubmit}
+        inputValue={inputValue}
+        handleChange={handleChange}
+      />
+    );
 
-//   test('disables submit button when input is empty', () => {
-//     const submitButton = screen.getByText('Add Todo');
-//     expect(submitButton).toBeDisabled();
-//   });
+    const input = getByPlaceholderText('What needs to be done?');
+    act(() => {
+      fireEvent.change(input, { target: { value: 'New task' } });
+    });
 
-//   test('enables submit button when input is not empty', () => {
-//     render(
-//       <TodoForm 
-//         handleSubmit={handleSubmit} 
-//         inputValue="New Todo" 
-//         handleChange={handleChange} 
-//       />
-//     );
-//     const submitButton = screen.getByText('Add Todo');
-//     expect(submitButton).not.toBeDisabled();
-//   });
+    expect(handleChange).toHaveBeenCalledTimes(1);
+  });
 
-//   test('calls handleChange when input changes', () => {
-//     const input = screen.getByPlaceholderText('What needs to be done?');
-//     fireEvent.change(input, { target: { value: 'New Todo' } });
-//     expect(handleChange).toHaveBeenCalled();
-//   });
+  it('calls handleSubmit on form submit', () => {
+    const { getByPlaceholderText } = render(
+      <TodoForm
+        handleSubmit={handleSubmit}
+        inputValue="New task"
+        handleChange={handleChange}
+      />
+    );
+
+    const input = getByPlaceholderText('What needs to be done?');
+    const form = input.closest('form');
+
+    if (form) {
+      act(() => {
+        fireEvent.submit(form);
+      });
+      expect(handleSubmit).toHaveBeenCalledTimes(1);
+    } else {
+      throw new Error('Form element not found');
+    }
+  });
+
+  it('disables submit button when inputValue is empty', () => {
+    const { getByText } = render(
+      <TodoForm
+        handleSubmit={handleSubmit}
+        inputValue=""
+        handleChange={handleChange}
+      />
+    );
+
+    const submitButton = getByText('Add Todo');
+    expect(submitButton).toBeDisabled();
+  });
+
+  it('enables submit button when inputValue is not empty', () => {
+    const { getByText } = render(
+      <TodoForm
+        handleSubmit={handleSubmit}
+        inputValue="New task"
+        handleChange={handleChange}
+      />
+    );
+
+    const submitButton = getByText('Add Todo');
+    expect(submitButton).toBeEnabled();
+  });
 });

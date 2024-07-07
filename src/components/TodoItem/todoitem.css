@@ -1,8 +1,8 @@
 .custom-checkbox input[type="checkbox"] {
   display: none;
 }
-  
-  /* Стилизовать кастомный checkbox */
+
+/* Стилизовать кастомный checkbox */
 .custom-checkbox .checkmark {
   width: 20px;
   height: 20px;
@@ -46,7 +46,6 @@
   background: #fff;
   margin: 10px 0;
   padding: 10px;
-  border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;

@@ -5,7 +5,7 @@ import { Todo } from "../../App";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-interface TodoItemProps {
+export interface TodoItemProps {
   todo: Todo;
   toggleTodo: (id: number) => void;
   updateTodo: (id: number, inputValue: string) => void;
