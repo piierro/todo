@@ -43,6 +43,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome"
+    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome",
+    "jest": "^27.5.1"
   }
 }

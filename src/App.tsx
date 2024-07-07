@@ -86,7 +86,7 @@ const App: React.FC = () => {
           updateTodo={updateTodo}
           deleteTodo={deleteTodo}
         />
-        <FilterButtons setFilter={setFilter} />
+        <FilterButtons setFilter={setFilter} activeFilter={filter} />
       </div>
     </div>
   );

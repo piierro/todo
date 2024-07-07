@@ -21,6 +21,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ handleSubmit, inputValue, handleCha
         type="submit" 
         value="Add Todo"
         className="submitBottom"
+        disabled={!inputValue.trim()} 
       />
     </form>
   );
