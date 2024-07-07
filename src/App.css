@@ -28,6 +28,12 @@ button {
   height: 100vh;
 }
 
+.container {
+  border: 1px solid #55010131;
+  padding: 20px 60px;
+  border-radius: 5px;
+}
+
 .submitBottom {
   padding: 12px 18px;
   cursor: pointer;
@@ -54,4 +60,28 @@ button {
   line-height: normal;
   text-shadow: 
   3px 0px 0 #fff, 1px -3px 0 #fff, 2px -1px 0px #fff, 3px -4px 0 #fff;
+}
+
+input:focus {
+  outline: none;
+}
+
+/* Стилизация для WebKit-браузеров (Chrome, Safari) */
+.todoList::-webkit-scrollbar {
+  width: 7px; /* Ширина вертикального скроллбара */
+  height: 7px; /* Высота горизонтального скроллбара */
+}
+
+.todoList::-webkit-scrollbar-track {
+  background: #fff; /* Цвет фона трека */
+  border-radius: 0px 5px 5px 0px; /* Радиус границ трека */
+}
+
+.todoList::-webkit-scrollbar-thumb {
+  background: #55010153; /* Цвет ползунка */
+  border-radius: 5px; /* Радиус границ ползунка */
+}
+
+.todoList::-webkit-scrollbar-thumb:hover {
+  background: #550101; /* Цвет ползунка при наведении */
 }

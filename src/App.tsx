@@ -82,7 +82,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <div>
+      <div className="container">
         <h2 className="title">Todos</h2>
         <TodoForm
           handleSubmit={handleSubmit}
