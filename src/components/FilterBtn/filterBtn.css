@@ -1,31 +1,29 @@
-
 .filterBtn {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.filterBtn button {
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  background-color: #fff;
+  margin: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+
+.filterBtn button.active {
+  background-color: #550101;
+  color: white;
+}
+
+.filterBtn button:hover:not(.active) {
+  background-color: #5501011a;
+}
   
-  .filterBtn button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    background-color: #fff;
-    color: #550101;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .filterBtn button:hover {
-    background-color: #550101;
-    color: #fff;
-  }
-  
-  .filterBtn button:focus {
-    outline: none;
-  }
-  
-  .filterBtn button.active {
-    background-color: #550101;
-    color: #fff;
-  }
+.filterBtn button:focus {
+  outline: none;
+}

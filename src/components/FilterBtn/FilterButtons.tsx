@@ -3,14 +3,30 @@ import "./filterBtn.css"
 
 interface FilterButtonsProps {
   setFilter: (filter: string) => void;
+  activeFilter: string;
 }
 
-const FilterButtons: React.FC<FilterButtonsProps> = ({ setFilter }) => {
+const FilterButtons: React.FC<FilterButtonsProps> = ({ setFilter, activeFilter }) => {
   return (
     <div className="filterBtn">
-      <button onClick={() => setFilter("all")}>All</button>
-      <button onClick={() => setFilter("incomplete")}>Active</button>
-      <button onClick={() => setFilter("completed")}>Completed</button>
+      <button 
+        className={activeFilter === "all" ? "active" : ""} 
+        onClick={() => setFilter("all")}
+      >
+        All
+      </button>
+      <button 
+        className={activeFilter === "incomplete" ? "active" : ""} 
+        onClick={() => setFilter("incomplete")}
+      >
+        Active
+      </button>
+      <button 
+        className={activeFilter === "completed" ? "active" : ""} 
+        onClick={() => setFilter("completed")}
+      >
+        Completed
+      </button>
     </div>
   );
 };

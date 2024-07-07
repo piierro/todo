@@ -12,18 +12,19 @@ export interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ todos, toggleTodo, updateTodo, deleteTodo }) => {
+  const shouldScroll = todos.length > 4;
 
   return (
-      <ul className="todoList">
-        {todos.map((todo )=> (
+    <ul className={`todoList ${shouldScroll ? 'scrollable' : ''}`}>
+      {todos.map(todo => (
         <TodoItem 
-           key={todo.id} 
-           todo={todo}
-           toggleTodo={toggleTodo} 
-           updateTodo={updateTodo}
-           deleteTodo={deleteTodo}
+          key={todo.id} 
+          todo={todo}
+          toggleTodo={toggleTodo} 
+          updateTodo={updateTodo}
+          deleteTodo={deleteTodo}
         />
-        ))}
+      ))}
     </ul>
   )
 }

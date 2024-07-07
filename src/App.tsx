@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./App.css";
 import TodoForm from './components/TodoForm/TodoForm';
 import TodoList from './components/TodoList/TodoList';
@@ -10,20 +10,45 @@ export interface Todo {
   completed: boolean;
 }
 
+const generateUniqueId = (todos: Todo[]): number => {
+  const ids = todos.map(todo => todo.id);
+  let newId = 1;
+  while (ids.includes(newId)) {
+    newId += 1;
+  }
+  return newId;
+};
+
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const storedTodos = localStorage.getItem('todos');
+    return storedTodos ? JSON.parse(storedTodos) : [];
+  });
   const [inputValue, setInputValue] = useState<string>("");
   const [filter, setFilter] = useState<string>("all");
+
+  // Загрузка данных из localStorage при загрузке страницы
+  useEffect(() => {
+    const storedTodos = localStorage.getItem('todos');
+    if (storedTodos) {
+      setTodos(JSON.parse(storedTodos));
+    }
+  }, []);
+  
+  // Сохранение данных в localStorage при изменении todos
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newTodo: Todo = {
       inputValue: inputValue,
-      id: todos.length ? todos[todos.length - 1].id + 1 : 1,
+      id: generateUniqueId(todos),
       completed: false,
     };
-    setTodos([...todos, newTodo]);
+    setTodos([newTodo, ...todos]);
     setInputValue("");
   }
 
@@ -70,7 +95,7 @@ const App: React.FC = () => {
           updateTodo={updateTodo}
           deleteTodo={deleteTodo}
         />
-        <FilterButtons setFilter={setFilter} />
+        <FilterButtons setFilter={setFilter} activeFilter={filter} />
       </div>
     </div>
   );

@@ -1,3 +1,8 @@
+.todoList {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
 .todoList li {
   display: flex;
   align-items: center;
@@ -6,37 +11,37 @@
   margin: 0 auto;
   width: 100%;
   padding: 10px;
-  border-bottom: 1px solid #eee;
-  border-radius: 5px;
+  border: 1px solid #eee;
+  border-top: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
   
 .todoList li input[type="text"] {
-    padding: 7px;
-    margin: 0 10px;
-    width: auto;
-    max-width: 100%;
-    flex-grow: 1;
-    font-size: 16px;
-    font-weight: 400;
-    color: #550101;
-    border: none;
-  }
+  padding: 7px;
+  margin: 0 10px;
+  width: auto;
+  max-width: 100%;
+  flex-grow: 1;
+  font-size: 16px;
+  font-weight: 400;
+  color: #550101;
+  border: none;
+}
   
-  .todoList li button {
-    margin-left: 10px;
-    padding: 5px 16px;
-    opacity: 0.3;
-    background-color: transparent;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #550101;
-  }
+.todoList li button {
+  margin-left: 10px;
+  padding: 5px 16px;
+  opacity: 0.3;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #550101;
+}
   
-  .todoList li button:hover {
-    opacity: 1;
-    transition: .3s;
+.todoList li button:hover {
+  opacity: 1;
+  transition: .3s;
 }
 
 .custom-checkbox input[type="checkbox"] {
