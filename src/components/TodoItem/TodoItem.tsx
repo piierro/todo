@@ -2,14 +2,18 @@ import React from 'react';
 import "./todoitem.css";
 import { Todo } from "../../App";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 interface TodoItemProps {
     todo: Todo;
     toggleTodo: (id: number) => void;
     updateTodo: (id: number, newValue: string) => void; 
     deleteTodo: (id: number) => void;
+    hideTodo: (id: number) => void;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo, toggleTodo, updateTodo, deleteTodo }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ todo, toggleTodo, updateTodo, deleteTodo, hideTodo }) => {
    const handleChecked = (id: number) => {
       toggleTodo(id);
     }
@@ -38,7 +42,9 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, toggleTodo, updateTodo, delet
       onChange={(e) => handleEdit(todo.id, e.target.value)}
       disabled={todo.completed}
     />
-    <button onClick={() => handleDelete(todo.id)}>D</button>
+    <button onClick={() => handleDelete(todo.id)}>
+      <FontAwesomeIcon icon={faTrash} />
+    </button>
   </li>
   )
 }
