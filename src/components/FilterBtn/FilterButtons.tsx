@@ -4,9 +4,10 @@ import "./filterBtn.css"
 interface FilterButtonsProps {
   setFilter: (filter: string) => void;
   activeFilter: string;
+  completedCount: number;
 }
 
-const FilterButtons: React.FC<FilterButtonsProps> = ({ setFilter, activeFilter }) => {
+const FilterButtons: React.FC<FilterButtonsProps> = React.memo(({ setFilter, activeFilter, completedCount }) => {
   return (
     <div className="filterBtn">
       <button 
@@ -25,10 +26,10 @@ const FilterButtons: React.FC<FilterButtonsProps> = ({ setFilter, activeFilter }
         className={activeFilter === "completed" ? "active" : ""} 
         onClick={() => setFilter("completed")}
       >
-        Completed
+        Completed ({completedCount})
       </button>
     </div>
   );
-};
+});
 
 export default FilterButtons;

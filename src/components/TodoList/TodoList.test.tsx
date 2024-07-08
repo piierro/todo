@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { act } from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import TodoList, { TodoListProps } from './TodoList';
-import { Todo } from '../../App';
+import { Todo } from '../Todos/useTodos';
 
 describe('TodoList Component', () => {
   const todos: Todo[] = [

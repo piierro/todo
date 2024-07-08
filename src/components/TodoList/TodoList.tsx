@@ -1,8 +1,8 @@
 import React from 'react';
 import "./todolist.css";
 
-import { Todo } from "../../App";
 import TodoItem from '../TodoItem/TodoItem';
+import { Todo } from '../Todos/useTodos';
 
 export interface TodoListProps {
     todos: Todo[];

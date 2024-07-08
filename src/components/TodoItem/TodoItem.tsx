@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import "./todoitem.css";
-import { Todo } from "../../App";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Todo } from '../Todos/useTodos';
 
 export interface TodoItemProps {
   todo: Todo;
