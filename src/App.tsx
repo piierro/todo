@@ -1,74 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "./App.css";
 import TodoForm from './components/TodoForm/TodoForm';
 import TodoList from './components/TodoList/TodoList';
 import FilterButtons from './components/FilterBtn/FilterButtons';
-
-export interface Todo {
-  id: number;
-  inputValue: string;
-  completed: boolean;
-}
-
-const generateUniqueId = (todos: Todo[]): number => {
-  const ids = todos.map(todo => todo.id);
-  let newId = 1;
-  while (ids.includes(newId)) {
-    newId += 1;
-  }
-  return newId;
-};
+import useTodos from './components/Todos/useTodos';
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>(() => {
-    const storedTodos = localStorage.getItem('todos');
-    return storedTodos ? JSON.parse(storedTodos) : [];
-  });
+  const { todos, addTodo, toggleTodo, updateTodo, deleteTodo } = useTodos();
   const [inputValue, setInputValue] = useState<string>("");
   const [filter, setFilter] = useState<string>("all");
 
-  // Загрузка данных из localStorage при загрузке страницы
-  useEffect(() => {
-    const storedTodos = localStorage.getItem('todos');
-    if (storedTodos) {
-      setTodos(JSON.parse(storedTodos));
-    }
-  }, []);
-  
-  // Сохранение данных в localStorage при изменении todos
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const newTodo: Todo = {
-      inputValue: inputValue,
-      id: generateUniqueId(todos),
-      completed: false,
-    };
-    setTodos([newTodo, ...todos]);
+    addTodo(inputValue);
     setInputValue("");
-  }
-
-  const toggleTodo = (id: number) => {
-    setTodos(
-      todos.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
   };
-
-  const updateTodo = (id: number, inputValue: string) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, inputValue } : todo
-    ));
-  }
-
-  const deleteTodo = (id: number) => {
-    setTodos(todos.filter(todo => todo.id !== id));
-  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -79,6 +25,8 @@ const App: React.FC = () => {
     if (filter === "incomplete") return !todo.completed;
     return true;
   });
+
+  const completedCount = todos.filter(todo => todo.completed).length;
 
   return (
     <div className="App">
@@ -95,10 +43,9 @@ const App: React.FC = () => {
           updateTodo={updateTodo}
           deleteTodo={deleteTodo}
         />
-        <FilterButtons setFilter={setFilter} activeFilter={filter} />
+        <FilterButtons setFilter={setFilter} activeFilter={filter} completedCount={completedCount}/>
       </div>
     </div>
   );
-}
-
+};
 export default App;
